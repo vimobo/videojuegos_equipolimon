@@ -1,6 +1,4 @@
 <?php
 
-define('DEFAULT_CONTROLLER', 'Form');
-define('DEFAULT_ACTION', 'showform');
-
-?>
+define('DEFAULT_CONTROLLER', 'Auth');
+define('DEFAULT_ACTION', 'showHome');

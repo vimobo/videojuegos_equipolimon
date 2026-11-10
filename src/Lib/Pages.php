@@ -13,6 +13,6 @@ class Pages {
 
         require self::VIEWS_DIR . 'Layout/header.php';
         require self::VIEWS_DIR . $pageName . '.php';
-        require self::VIEWS_DIR . 'Layout/header.php';
+        require self::VIEWS_DIR . 'Layout/footer.php';
     }
 }

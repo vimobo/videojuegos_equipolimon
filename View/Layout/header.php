@@ -10,7 +10,5 @@
     </head>
 
     <body>
-        <header>
-            <h1>From!</h1>
-        </header>
+
         <main>
