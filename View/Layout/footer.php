@@ -1,6 +1,6 @@
         
     <footer>
-        <h3>Give us ur info...</h3>
+        <h3>VideoGame Projets</h3>
     </footer>
         </main>
     </body>
