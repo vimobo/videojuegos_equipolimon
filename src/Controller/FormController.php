@@ -15,7 +15,6 @@ class FormController
 
     public function __construct()
     {
-
         $this->pages = new Pages();
     }
 
