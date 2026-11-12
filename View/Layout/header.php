@@ -11,6 +11,6 @@
 
     <body>
         <header>
-            <h1>From!</h1>
+            <h1>Form!</h1>
         </header>
         <main>
