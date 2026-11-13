@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Controller;
+namespace Controllers;
 
-use Lib\Pages;
+use Core\Pages;
 use Requests\LoginRequest;
 use Requests\RegisterRequest;
 
