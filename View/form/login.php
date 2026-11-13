@@ -1,6 +1,6 @@
 <h1>Login</h1>
 
-<form method="POST" action="index.php?controller=Auth&amp;action=processLogin">
+<form method="POST" action="action=processLogin">
     <link rel="stylesheet" href="./form.css">
 
 

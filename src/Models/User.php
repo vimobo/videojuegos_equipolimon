@@ -6,8 +6,8 @@ namespace Models;
 class User
 {
 
-        private string $email;
-        private string $password;
+        public private(set) string $email;
+        public private(set) string $password;
 
         public function __construct(string $email, string $password) {
             $this->password = $password;

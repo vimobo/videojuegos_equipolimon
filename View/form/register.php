@@ -1,6 +1,6 @@
 <h1>Register</h1>
 
-<form method="POST" action="index.php?controller=Auth&amp;action=processRegister">
+<form method="POST" action="/processRegister">
     <link rel="stylesheet" href="./form.css">
 
     <p>

@@ -4,8 +4,10 @@ declare(strict_types=1);
 namespace Controllers;
 
 use Core\Pages;
+use Repository\UserRepository;
 use Requests\LoginRequest;
 use Requests\RegisterRequest;
+use Models\User;
 
 class AuthController
 {
@@ -50,7 +52,14 @@ class AuthController
         if (!empty($registerRequest->response['errors'])) {
             $this->pages->render('form/register', $registerRequest->response);
 
-        } else {
+        } 
+        else {
+            //si va bien
+            UserRepository::addUser(new User(
+                $registerRequest->response['mail'],
+                $registerRequest->response['password']
+            ));
+
             $this->pages->render('form/formResponse', $registerRequest->response);
         }
     }

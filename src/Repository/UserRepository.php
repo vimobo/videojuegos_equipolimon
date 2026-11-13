@@ -8,21 +8,67 @@ use Models\User;
 class UserRepository
 {
 
-    public function addUser(User $user)
+    private static int $idCount = -1;
+
+    private static string $directory = __DIR__ . "/../database";
+    private static string $path = __DIR__ . "/../database/user.json";
+
+    public static function initialize()
     {
-        $json = json_encode($user, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+        if (self::$idCount > 0 || self::doesPathExists())
+            return;
 
-        $path = __DIR__ . "/../database/user.json";
-
-        file_put_contents($path, $json);
+        $data = json_decode(self::$path, true);
+        self::$idCount = count($data);
     }
 
-
-    public function findUserByEmail(string $email)
+    public static function doesPathExists(): bool 
     {
+        if (!is_dir(self::$directory))
+            return false;
+            mkdir(self::$directory, 0755);
 
+        if (!is_file(self::$path))
+            return false;
+            
+            $currentData = json_decode(file_get_contents(self::$path), true);
+
+        self::initialize();
+        return true;
     }
 
+    public static function addUser(User $user)
+    {
 
+        $doesPathExist = self::doesPathExists();
 
+        if($doesPathExist) {
+
+            $currentData[self::$idCount] = $user;
+            $json = json_encode($currentData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+            
+            file_put_contents(self::$path, $json);
+            //var_dump(UserRepository::findUserById("0"));
+            }
+    }
+
+    public static function findUserById(string $id): array|null
+    {
+        self::$directory = __DIR__ . "/../database";
+        self::$path = self::$directory . "/user.json";
+
+        $currentData = [];
+
+        if (!is_dir(self::$directory))
+            return null;
+
+        if (!is_file(self::$path))
+            return null;
+
+        $storedData = json_decode(file_get_contents(self::$path), true);
+        if (!isset($storedData[$id]))
+            return null;
+
+        return $storedData[$id];
+    }
 }
