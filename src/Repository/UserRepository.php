@@ -22,34 +22,37 @@ class UserRepository
         self::$idCount = count($data);
     }
 
-    public static function doesPathExists(): bool 
+    public static function doesPathExists(): bool
     {
         if (!is_dir(self::$directory))
             return false;
-            mkdir(self::$directory, 0755);
 
         if (!is_file(self::$path))
             return false;
-            
-            $currentData = json_decode(file_get_contents(self::$path), true);
 
-        self::initialize();
+
         return true;
     }
 
     public static function addUser(User $user)
     {
 
+        self::initialize();
+
         $doesPathExist = self::doesPathExists();
 
-        if($doesPathExist) {
+        if ($doesPathExist) {
 
             $currentData[self::$idCount] = $user;
+            
+            $currentData = json_decode(file_get_contents(self::$path), true);
             $json = json_encode($currentData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
             
             file_put_contents(self::$path, $json);
             //var_dump(UserRepository::findUserById("0"));
-            }
+        } else {
+            mkdir(self::$directory, 0755);
+        }
     }
 
     public static function findUserById(string $id): array|null
