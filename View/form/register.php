@@ -28,7 +28,7 @@
                     <?= $error?>  
 
             <?php endforeach; ?>
-            .
+            
     <?php endif; ?>
     </p>
 

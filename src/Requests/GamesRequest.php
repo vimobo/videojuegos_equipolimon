@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace Requests;
 
-class GamesRequests
+use finfo;
+
+class GamesRequest
 {
 
     public private(set) array $response;
@@ -16,18 +18,34 @@ class GamesRequests
 
     public function validate($input): void
     {
-        const 
-        var_dump($input);
-        if
+        define('MAX_SIZE', 1024 * 1024 * 20);
 
-        if($input['error'] != UPLOAD_ERR_OK)
-            return;
+        if ($input['name'] == ''){
+            $this->response['errors']['empty'] = "Upload something..";
+        }
 
-        if(!is_uploaded_file($input))
+        if ($input['error'] != UPLOAD_ERR_OK) {
+            $this->response['errors']['size'] = "Upload has failed";
             return;
+        }
 
-        if($input.pathinfo() != "zip")
-            return;
+        if (!is_uploaded_file($input['name'])) {
+            $this->response['errors']['file'] = "Not a file";
+        }
+
+        if ($input['size'] > MAX_SIZE) {
+            $this->response['errors']['size'] = "File size is above limit.";
+        }
+
+        
+        $finfo = new finfo(FILEINFO_MIME_TYPE);
+        $mime = $finfo->file($input["tmp_name"]);
+
+        if ($mime != "application/x-zip-compressed") {
+            $this->response['errors']['format'] = "File format not .zip";
+        }
+
+        //if($input.pathinfo() != "zip")
+        //    return;
     }
-
 }

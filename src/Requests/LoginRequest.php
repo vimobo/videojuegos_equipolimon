@@ -5,33 +5,36 @@ namespace Requests;
 
 use Repository\UserRepository;
 
-class LoginRequest {
+class LoginRequest
+{
 
     use EmailValidator;
     use PasswordValidator;
     public private(set) array $response;
 
-    public function __construct(array $input) {
+    public function __construct(array $input)
+    {
         $this->response = [];
-
         $this->loginRequest($input);
     }
-    
+
     public function sanitize(array $input)
     {
         $this->sanitizePassword($this->response, $input);
         $this->sanitizeEmail($this->response, $input);
     }
 
-    public function validate(): void {
+    public function validate(): void
+    {
         $this->validatePassword($this->response);
         $this->validateEmail($this->response);
     }
 
-    public function loginRequest(array $input): void {
+    public function loginRequest(array $input): void
+    {
         $this->sanitize($input);
         $this->validate();
         UserRepository::authUser($this->response);
     }
-    
+
 }

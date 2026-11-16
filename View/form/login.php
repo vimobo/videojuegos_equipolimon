@@ -25,11 +25,11 @@
         <?php endif; ?>
 
     </p>
-                <p>
-                    <?php if (!empty($errors['auth'])): ?>
+    <p>
+        <?php if (!empty($errors['auth'])): ?>
             <?= $errors['auth'] ?>
         <?php endif ?>
-                </p>
+    </p>
 
     <input type="submit" />
 
