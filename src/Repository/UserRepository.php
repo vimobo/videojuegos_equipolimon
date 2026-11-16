@@ -7,31 +7,33 @@ use Models\User;
 
 class UserRepository
 {
-
-    private static int $idCount = -1;
-
     private static string $directory = __DIR__ . "/../database";
     private static string $path = __DIR__ . "/../database/user.json";
 
     public static function initialize()
     {
-        if (self::$idCount > 0 || self::doesPathExists())
-            return;
+        if (!is_dir(self::$directory))
+            mkdir(self::$directory, 0755);
 
-        $data = json_decode(self::$path, true);
-        self::$idCount = count($data);
     }
 
     public static function doesPathExists(): bool
     {
-        if (!is_dir(self::$directory))
-            return false;
+        return is_dir(self::$directory) && is_file(self::$path);
+    }
 
-        if (!is_file(self::$path))
-            return false;
+    public static function getDataFromDatabase(): array
+    {
+        $dataFound = [];
 
+        if (self::doesPathExists()) {
+            $data = json_decode(file_get_contents(self::$path), true);
 
-        return true;
+            if (!is_null($data))
+                $dataFound = $data;
+        }
+
+        return $dataFound;
     }
 
     public static function addUser(User $user)
@@ -39,20 +41,11 @@ class UserRepository
 
         self::initialize();
 
-        $doesPathExist = self::doesPathExists();
+        $currentData = self::getDataFromDatabase();
+        $currentData[$user->email] = $user;
 
-        if ($doesPathExist) {
-
-            $currentData[self::$idCount] = $user;
-            
-            $currentData = json_decode(file_get_contents(self::$path), true);
-            $json = json_encode($currentData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-            
-            file_put_contents(self::$path, $json);
-            //var_dump(UserRepository::findUserById("0"));
-        } else {
-            mkdir(self::$directory, 0755);
-        }
+        $json = json_encode((object) $currentData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+        file_put_contents(self::$path, $json);
     }
 
     public static function findUserById(string $id): array|null
@@ -74,4 +67,24 @@ class UserRepository
 
         return $storedData[$id];
     }
+
+    public function doesUserExistByEmail(string $mail): bool
+    {
+        return !is_null(self::findUserById($mail));
+    }
+
+    public static function authUser(array &$response): bool
+    {
+        $user = self::findUserById($response['mail']);
+
+        if (!is_null($user)) {
+            $dataPassword = $user['password'];
+            var_dump($user);
+            return password_verify($response['password'], $dataPassword);
+
+        } else
+            $response['errors']['auth'] = "El usuario/contraseña no coinciden" ;
+            return false;
+    }
 }
+

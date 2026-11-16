@@ -38,6 +38,7 @@ class AuthController
     public function processLogin()
     {
         $loginRequest = new LoginRequest($_POST['login'] ?? []);
+
         if (!empty($loginRequest->response['errors'])) {
             $this->pages->render('form/login', $loginRequest->response);
 

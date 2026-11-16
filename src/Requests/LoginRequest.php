@@ -3,27 +3,35 @@ declare(strict_types=1);
 
 namespace Requests;
 
+use Repository\UserRepository;
+
 class LoginRequest {
 
+    use EmailValidator;
+    use PasswordValidator;
     public private(set) array $response;
 
     public function __construct(array $input) {
         $this->response = [];
 
+        $this->loginRequest($input);
+    }
+    
+    public function sanitize(array $input)
+    {
+        $this->sanitizePassword($this->response, $input);
+        $this->sanitizeEmail($this->response, $input);
+    }
+
+    public function validate(): void {
+        $this->validatePassword($this->response);
+        $this->validateEmail($this->response);
+    }
+
+    public function loginRequest(array $input): void {
         $this->sanitize($input);
         $this->validate();
+        UserRepository::authUser($this->response);
     }
-
-    public function sanitize(array $response) {
-
-        $this->response['mail'] = strip_tags(htmlspecialchars(trim($response['mail'])));
-        $this->response['password'] = password_hash(trim($response['password']), PASSWORD_DEFAULT);
-    }
-
-    public function validate () {
-        if(!filter_var($this->response['mail'], FILTER_VALIDATE_EMAIL)) {
-            $this->response['errors']['mail'] = "Email no válido";
-        }
-    }
-
+    
 }

@@ -1,6 +1,6 @@
 <h1>Login</h1>
 
-<form method="POST" action="action=processLogin">
+<form method="POST" action="processLogin">
     <link rel="stylesheet" href="./form.css">
 
 
@@ -10,7 +10,7 @@
         <input type="text" placeholder="mail" name="login[mail]" id="mail" value="<?= ($mail ?? '') ?>" />
         <?php if (!empty($errors['mail'])): ?>
             <?= $errors['mail'] ?>
-        <?php endif; ?>
+        <?php endif ?>
     </p>
 
 
@@ -18,10 +18,18 @@
         <label for="password">Password</label>
         <input type="password" placeholder="password..." name="login[password]" id="password" />
         <?php if (!empty($errors['password'])): ?>
-            <?= $errors['password'] ?>
-        <?php endif; ?>
-    </p>
+            <?php foreach ($errors['password'] as $error): ?>
 
+                <?= $error ?>
+            <?php endforeach; ?>
+        <?php endif; ?>
+
+    </p>
+                <p>
+                    <?php if (!empty($errors['auth'])): ?>
+            <?= $errors['auth'] ?>
+        <?php endif ?>
+                </p>
 
     <input type="submit" />
 
