@@ -43,7 +43,7 @@ class AuthController
             $this->pages->render('form/login', $loginRequest->response);
 
         } else {
-            $this->pages->render('form/formResponse', $loginRequest->response);
+            $this->pages->render('form/gameForm', $loginRequest->response);
         }
     }
 
@@ -61,7 +61,7 @@ class AuthController
                 $registerRequest->response['password']
             ));
 
-            $this->pages->render('form/formResponse', $registerRequest->response);
+            $this->pages->render('form/gameForm', $registerRequest->response);
         }
     }
 

@@ -17,9 +17,9 @@ class GameController
     {
         $gamesRequest = new GamesRequest($_FILES['gamefile']);
         // if (empty($gamesRequest->response['errors'])) {
-        $this->pages->render('form/formResponse', $gamesRequest->response);
+        $this->pages->render('form/gameForm', $gamesRequest->response);
         /*} else {
-            $this->pages->render('form/formResponse', $gamesRequest->response);
+            $this->pages->render('form/gameForm', $gamesRequest->response);
 
         }*/
     }
