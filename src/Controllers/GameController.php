@@ -2,6 +2,7 @@
 namespace Controllers;
 
 use Core\Pages;
+use Repository\GameRepository;
 use Requests\GamesRequest;
 
 class GameController
@@ -15,12 +16,14 @@ class GameController
 
     public function addGame()
     {
-        $gamesRequest = new GamesRequest($_FILES['gamefile']);
-         if (empty($gamesRequest->response['errors'])) {
-        $this->pages->render('form/formResponse', $gamesRequest->response);
+        $file = $_FILES['gamefile'];
+        $gamesRequest = new GamesRequest($file);
+        if ((isset($gamesRequest->response['errors']))) {
+            $this->pages->render('form/gameForm', $gamesRequest->response);
         } else {
-
-            $this->pages->render('form/games', $gamesRequest->response);
+            $repo = new GameRepository($file);
+            if(!isset($repo->response['errors']))
+                $this->pages->render('form/games', $gamesRequest->response);
         }
     }
 }
