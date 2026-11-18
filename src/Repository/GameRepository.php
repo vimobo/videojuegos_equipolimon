@@ -9,12 +9,14 @@ use DirectoryIterator;
 class GameRepository
 {
     public private(set) string $directory;
+    public private(set) string $jsonFile;
     public private(set) array $files;
     public private(set) array $file;
 
     public function __construct(array $file)
     {
         $this->directory = __DIR__ . "/../database/games";
+        $this->jsonFile = $this->directory . 'videogames.json';
         $this->file = $file;
         $this->files = [];
 
@@ -33,7 +35,6 @@ class GameRepository
         $origin = $this->file['tmp_name'];
         var_dump($this->directory . "/" . time() . ".zip");
         move_uploaded_file($origin, $this->directory . "/" . time() . ".zip");
-
     }
 
     private function getFiles(): void
