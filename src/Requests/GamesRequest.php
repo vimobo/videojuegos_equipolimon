@@ -20,7 +20,7 @@ class GamesRequest
     {
         define('MAX_SIZE', 1024 * 1024 * 20);
 
-        if ($input['name'] == ''){
+        if ($input['name'] == '') {
             $this->response['errors']['empty'] = "Upload something..";
         }
 
@@ -28,8 +28,9 @@ class GamesRequest
             $this->response['errors']['size'] = "Upload has failed";
             return;
         }
+        $tmp = $_FILES['gamefile']['tmp_name'];
 
-        if (!is_uploaded_file($input['name'])) {
+        if (!is_uploaded_file($input['tmp_name'])) {
             $this->response['errors']['file'] = "Not a file";
         }
 
@@ -37,11 +38,10 @@ class GamesRequest
             $this->response['errors']['size'] = "File size is above limit.";
         }
 
-        
         $finfo = new finfo(FILEINFO_MIME_TYPE);
         $mime = $finfo->file($input["tmp_name"]);
 
-        if ($mime != "application/x-zip-compressed") {
+        if ($mime != "application/zip") {
             $this->response['errors']['format'] = "File format not .zip";
         }
 
