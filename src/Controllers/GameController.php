@@ -16,11 +16,11 @@ class GameController
     public function addGame()
     {
         $gamesRequest = new GamesRequest($_FILES['gamefile']);
-        // if (empty($gamesRequest->response['errors'])) {
+         if (empty($gamesRequest->response['errors'])) {
         $this->pages->render('form/formResponse', $gamesRequest->response);
-        /*} else {
-            $this->pages->render('form/formResponse', $gamesRequest->response);
+        } else {
 
-        }*/
+            $this->pages->render('form/games', $gamesRequest->response);
+        }
     }
 }
