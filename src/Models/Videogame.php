@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+namespace Models;
+
 class Videogame {
 
     public private(set) string $fileName;
@@ -40,11 +42,4 @@ class Videogame {
 		$this->ownerEmail = $value;
 	}
 
-	public function getPath() {
-		return $this->path;
-	}
-
-	public function setPath($value) {
-		$this->path = $value;
-	}
 }

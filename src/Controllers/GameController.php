@@ -22,8 +22,9 @@ class GameController
             $this->pages->render('form/gameForm', $gamesRequest->response);
         } else {
             $repo = new GameRepository($file);
-            if(!isset($repo->response['errors']))
-                $this->pages->render('form/games', $gamesRequest->response);
+            $repo->games();
+            var_dump($repo->files);
+            $this->pages->render('form/games',  ['files' => $repo->files]);
         }
     }
 }

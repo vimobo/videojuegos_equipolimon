@@ -43,7 +43,8 @@ class AuthController
             $this->pages->render('form/login', $loginRequest->response);
 
         } else {
-            $this->pages->render('form/gameForm', $loginRequest->response);
+            header('Location: /addGame');
+            exit;
         }
     }
 
@@ -53,8 +54,7 @@ class AuthController
         if (!empty($registerRequest->response['errors'])) {
             $this->pages->render('form/register', $registerRequest->response);
 
-        } 
-        else {
+        } else {
             //si va bien
             UserRepository::addUser(new User(
                 $registerRequest->response['mail'],

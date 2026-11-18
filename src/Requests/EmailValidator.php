@@ -6,7 +6,7 @@ trait EmailValidator
 
     public function sanitizeEmail(array &$response, array $input): void
     {
-        $response['mail'] = strip_tags(htmlspecialchars(trim($input['mail'])));
+        $response['mail'] = strip_tags(htmlspecialchars(trim(strtolower($input['mail']))));
     }
     public function validateEmail(array &$response)
     {
