@@ -8,14 +8,10 @@ class Videogame {
     public private(set) string $fileName;
     public private(set) string $ownerEmail;
 
-
-
-
 	public function __construct($fileName, $ownerEmail) {
 
 		$this->fileName = date('Ymd_His') . bin2hex(random_bytes(4)) . $fileName;
 		$this->ownerEmail = $ownerEmail;
-        
 	}
 
 	public function getOwnerId() {
