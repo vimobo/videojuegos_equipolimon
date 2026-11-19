@@ -43,7 +43,8 @@ class AuthController
             $this->pages->render('form/login', $loginRequest->response);
 
         } else {
-            header('Location: /addGame');
+            $this->pages->render('form/gameForm', $loginRequest->response);
+           // header('Location: /addGame');
             exit;
         }
     }

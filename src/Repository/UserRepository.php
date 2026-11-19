@@ -56,6 +56,10 @@ class UserRepository
             $response['errors']['auth'] = "El usuario/contraseña no coinciden" ;
             return false;
         }
+        if(!password_verify($response['password'], $user['password'])) {
+            $response['errors']['auth'] = "El usuario/contraseña no coinciden" ;
+            return false;
+        }
 
         return password_verify($response['password'], $user['password']);
     }

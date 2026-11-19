@@ -2,7 +2,7 @@
 
 <?php if (!empty($files)): ?>
     <?php foreach ($files as $file): ?>
-        <div class>
+        <div classd>
 
             <p>
                 <?= $file ?>
