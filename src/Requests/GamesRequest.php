@@ -20,7 +20,7 @@ class GamesRequest
 
     public function sanitize($input): void
     {
-        $this->sanitizeElement($input, "name");
+        $this->sanitizeElement($input, "gameName");
         $this->sanitizeElement($input, "description");
         $this->sanitizeElement($input, "author");
         $this->sanitizeElement($input, "category");
@@ -41,7 +41,6 @@ class GamesRequest
 
     public function validateFile($input): void
     {
-        var_dump(($input));
         define('MAX_SIZE', 1024 * 1024 * 10);
 
         if ($input['name'] == '') {
@@ -49,7 +48,6 @@ class GamesRequest
         }
 
         if ($input['error'] != UPLOAD_ERR_OK) {
-            var_dump($input['error']);
             $this->response['errors']['size'] = "Upload has failed";
             return;
         }
@@ -76,7 +74,7 @@ class GamesRequest
 
     public function validateData(): void {
 
-        if ($this->response['name'] == '') {
+        if ($this->response['gameName'] == '') {
             $this->response['errors']['emptyName'] = "Name is empty";
         }
 
@@ -92,7 +90,7 @@ class GamesRequest
             $this->response['errors']['emptyAuthor'] = "Author is empty";
         }
 
-        if (strlen($this->response['name']) > 40) {
+        if (strlen($this->response['gameName']) > 40) {
             $this->response['errors']['nameTooLong'] = "Name is too long";
         }
 

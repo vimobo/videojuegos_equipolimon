@@ -25,10 +25,28 @@ class GameController
             $this->pages->render('form/gameForm', $gamesRequest->response);
             
         } else {
-            $repo = new GameRepository($file);
+            $repo = new GameRepository($file, $gamesRequest->response);
             $repo->games();
             var_dump($repo->files);
             $this->pages->render('form/games',  ['files' => $repo->files]);
         }
+    }
+
+        public function downloadGame(): void
+    {
+        $file = __DIR__ . "/../database/games/" . basename($_GET['file']);
+
+        if (!is_file($file)) {
+            http_response_code(404);
+            exit;
+        }
+
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename="' . basename($file) . '"');
+        header('Content-Length: ' . filesize($file));
+
+        readfile($file);
+        exit;
     }
 }

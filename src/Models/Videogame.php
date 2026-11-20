@@ -6,36 +6,28 @@ namespace Models;
 class Videogame {
 
     public private(set) string $fileName;
-    public private(set) string $ownerEmail;
+    public private(set) string $author;
+    public private(set) string $category;
+    public private(set) string $description;
+    public private(set) string $path;
 
-	public function __construct($fileName, $ownerEmail) {
 
-		$this->fileName = date('Ymd_His') . bin2hex(random_bytes(4)) . $fileName;
-		$this->ownerEmail = $ownerEmail;
+
+	public function __construct($fileName,  $author, $gameCategory, $description) {
+
+		$this->fileName = $fileName;
+		$this->author = $author;
+		$this->category = $gameCategory;
+		$this->description = $description;
+		$this->path = ""; 
 	}
 
-	public function getOwnerId() {
-		return $this->ownerEmail;
+
+	public function getPath() {
+		return $this->path;
 	}
 
-	public function setOwnerId($value) {
-		$this->ownerEmail = $value;
+	public function setPath($value) {
+		$this->path = $value;
 	}
-
-	public function getFileName() {
-		return $this->fileName;
-	}
-
-	public function setFileName($value) {
-		$this->fileName = $value;
-	}
-
-	public function getOwnerEmail() {
-		return $this->ownerEmail;
-	}
-
-	public function setOwnerEmail($value) {
-		$this->ownerEmail = $value;
-	}
-
 }
