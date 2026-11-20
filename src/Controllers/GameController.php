@@ -27,7 +27,6 @@ class GameController
         } else {
             $repo = new GameRepository($file, $gamesRequest->response);
             $repo->games();
-            var_dump($repo->files);
             $this->pages->render('form/games',  ['files' => $repo->files]);
         }
     }
