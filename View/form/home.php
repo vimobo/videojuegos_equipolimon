@@ -1,9 +1,8 @@
 <div>
-    <p>Hola Tines ya una cuenta??</p>
 
 
-    <a href="/login">Logeate Bro</a>
-    <a href="/register">Registrar</a>
+    <a href="/login">Login</a>
+    <a href="/register">Register</a>
     
 
 
