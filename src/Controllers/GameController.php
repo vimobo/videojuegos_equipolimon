@@ -17,9 +17,13 @@ class GameController
     public function addGame()
     {
         $file = $_FILES['game'];
-        $gamesRequest = new GamesRequest($file);
+        $data = $_POST['game'];
+
+        $gamesRequest = new GamesRequest($file, $data);
+
         if ((isset($gamesRequest->response['errors']))) {
             $this->pages->render('form/gameForm', $gamesRequest->response);
+            
         } else {
             $repo = new GameRepository($file);
             $repo->games();

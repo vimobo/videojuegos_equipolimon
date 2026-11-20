@@ -18,7 +18,7 @@ class LoginRequest
         $this->loginRequest($input);
     }
 
-    public function sanitize(array $input)
+    public function sanitize(array $input): void
     {
         $this->sanitizePassword($this->response, $input);
         $this->sanitizeEmail($this->response, $input);
