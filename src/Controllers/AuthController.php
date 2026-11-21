@@ -12,7 +12,6 @@ use Models\User;
 class AuthController
 {
 
-
     private Pages $pages;
 
     public function __construct()
