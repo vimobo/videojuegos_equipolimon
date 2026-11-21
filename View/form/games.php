@@ -20,7 +20,6 @@
     <p>There's no games to show.</p>
 <?php endif; ?>
 
-
 <a href="./login">Exit</a>
 
 </form>
