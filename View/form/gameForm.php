@@ -1,8 +1,7 @@
 <link rel="stylesheet" href="./form.css">
 
 <p>
-    <!-- Hola <?= substr($mail, 0, strpos($mail, "@")) ?>
-    !-->
+    Hola, <?= substr($mail, 0, strpos($mail, "@")) ?>
 </p>
 
 <div>
@@ -23,14 +22,15 @@
         <input type="file" name="game" id="gamefile">
         <input type="submit" value="Upload Game" id="submitButton">
     </form>
+    
     <p>
         <? $errors ?>
         <?php if (!empty($errors)): ?>
             <?php foreach ($errors as $error): ?>
-            <p>
-                <?= $error ?>
-            </p>
-        <?php endforeach; ?>
-    <?php endif; ?>
+                <p>
+                    <?= $error ?>
+                </p>
+            <?php endforeach; ?>
+        <?php endif; ?>
     </p>
 </div>
