@@ -1,6 +1,6 @@
 <?php
 
-namespace Lib;
+namespace Core;
 
 class Pages {
     private const string VIEWS_DIR = __DIR__ . '/../../View/';

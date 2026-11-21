@@ -1,11 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace Controller;
+namespace Controllers;
 
-use Lib\Pages;
+use Core\Pages;
+use Repository\UserRepository;
 use Requests\LoginRequest;
 use Requests\RegisterRequest;
+use Models\User;
 
 class AuthController
 {
@@ -35,11 +37,14 @@ class AuthController
     public function processLogin()
     {
         $loginRequest = new LoginRequest($_POST['login'] ?? []);
+
         if (!empty($loginRequest->response['errors'])) {
             $this->pages->render('form/login', $loginRequest->response);
 
         } else {
-            $this->pages->render('form/formResponse', $loginRequest->response);
+            $this->pages->render('form/gameForm', $loginRequest->response);
+           // header('Location: /addGame');
+            exit;
         }
     }
 
@@ -50,7 +55,13 @@ class AuthController
             $this->pages->render('form/register', $registerRequest->response);
 
         } else {
-            $this->pages->render('form/formResponse', $registerRequest->response);
+            //si va bien
+            UserRepository::addUser(new User(
+                $registerRequest->response['mail'],
+                $registerRequest->response['password']
+            ));
+
+            $this->pages->render('form/gameForm', $registerRequest->response);
         }
     }
 

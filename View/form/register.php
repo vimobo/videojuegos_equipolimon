@@ -1,9 +1,13 @@
 <h1>Register</h1>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <form method="POST" action="index.php?controller=Form&amp;action=process">
 =======
 <form method="POST" action="index.php?controller=Auth&amp;action=processRegister">
+>>>>>>> main
+=======
+<form method="POST" action="/processRegister">
 >>>>>>> main
     <link rel="stylesheet" href="./form.css">
 
@@ -47,7 +51,7 @@
                     <?= $error?>  
 
             <?php endforeach; ?>
-            .
+            
     <?php endif; ?>
 >>>>>>> main
     </p>

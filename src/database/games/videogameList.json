@@ -1,0 +1,37 @@
+{
+    "asdasd": {
+        "fileName": "asdasd",
+        "author": "sss",
+        "category": "ddddd",
+        "description": "vvvv",
+        "path": "\/var\/www\/projects\/videojuegos_equipolimon\/src\/Repository\/..\/database\/games\/1795192545.zip"
+    },
+    "aaa": {
+        "fileName": "aaa",
+        "author": "ccc",
+        "category": "xxxx",
+        "description": "vvv",
+        "path": "1795193915.zip"
+    },
+    "1795193982.zip": {
+        "fileName": "aaa",
+        "author": "ccc",
+        "category": "xxxx",
+        "description": "vvv",
+        "path": "1795193982.zip"
+    },
+    "1795193986.zip": {
+        "fileName": "aaa",
+        "author": "ccc",
+        "category": "xxxx",
+        "description": "vvv",
+        "path": "1795193986.zip"
+    },
+    "1795194985.zip": {
+        "fileName": "aaa",
+        "author": "ccc",
+        "category": "xxxx",
+        "description": "vvv",
+        "path": "1795194985.zip"
+    }
+}

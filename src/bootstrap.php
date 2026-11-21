@@ -1,9 +1,17 @@
 <?php
+/** ARCHIVO DE ARRANQUE  */
+declare(strict_types=1);
 
-use Controllers\FrontController;
+// Ruta absoluta a la raíz del proyecto.
 
-require_once __DIR__ . '/../autoloader.php';
-require_once __DIR__ . '/../config/config.php';
-require_once __DIR__ . '/../src/Lib/helpers.php';
+define('BASE_PATH', dirname(__DIR__));
 
-Controller\FrontController::main();
+require BASE_PATH . '/autoloader.php';
+require BASE_PATH . '/config/config.php';
+require BASE_PATH . '/config/routes.php';
+require_once BASE_PATH . '/src/Core/helpers.php';
+
+use Core\Router;
+
+// Evalúa la URL recibida y ejecuta la función/controlador asociado
+Router::dispatch();

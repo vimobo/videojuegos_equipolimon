@@ -3,10 +3,14 @@ declare(strict_types=1);
 
 namespace Requests;
 
+use Models\User;
+
 class RegisterRequest
 {
+    use PasswordValidator;
+    use EmailValidator;
 
-    public private(set) array $response;
+    public private(set) array $response = [];
 
     public function __construct(array $input)
     {
@@ -16,40 +20,27 @@ class RegisterRequest
         $this->validate();
     }
 
-    public function sanitize(array $response)
-    {
+    public function sanitize($input) {
+        $this->sanitizeEmail($this->response, $input);
+        $this->sanitizePassword($this->response, $input);
+        $this->response['passwordR'] = $response['passwordR'] ?? "";
 
-        $this->response['mail'] = strip_tags(htmlspecialchars(trim($response['mail'])));
-        $this->response['password'] = strip_tags($response['password']);
     }
+    
 
     public function validate()
     {
-        if (!filter_var($this->response['mail'], FILTER_VALIDATE_EMAIL)) {
-            $this->response['errors']['mail'] = "Email no válido";
-        }
 
-        $password = $this->response['password'];
-        var_dump($this->response['passwordR']);
+        $this->validateEmail($this->response);
+        $this->validatePassword($this->response);
 
-        if (!preg_match('/[A-Z]/', $password)) {
-            $this->response['errors']['password']['mayuscula'] = "Requiere una mayúscula";
-        }
+        $this->register();
+    }
 
-        if ($password === $this->response['passwordR']) {
-            $this->response['errors']['password']['repetido'] = "Las contraseñas no coinciden";
-        }
-
-        if (!preg_match('/[a-z]/', $password)) {
-            $this->response['errors']['password']['minuscula'] = "Requiere una minúscula";
-        }
-
-        if (!preg_match('/[0-9]/', $password)) {
-            $this->response['errors']['password']['numero'] = "Requiere un número";
-        }
-
-        if (strlen($password) < 10) {
-            $this->response['errors']['password']['longitud'] = "Necesita al menos 10 caracteres";
+    public function register()
+    {
+        if (empty($this->response['errors'])) {
+            $user = new User($this->response['password'], $this->response['mail']);
         }
     }
 
