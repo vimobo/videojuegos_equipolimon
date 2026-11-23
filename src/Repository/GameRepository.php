@@ -38,11 +38,9 @@ class GameRepository
     {
         $origin = $this->file['tmp_name'];
         $fileName =   time() . ".zip";
-        move_uploaded_file($origin,$this->directory . "/" . $fileName);
+        move_uploaded_file($origin, $this->directory . "/" . $fileName);
 
         $this->game->setPath($fileName);
-
-
     }
 
     private function getFiles(): void
