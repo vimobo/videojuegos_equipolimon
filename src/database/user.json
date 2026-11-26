@@ -22,5 +22,9 @@
     "asdasdasd@asd.com": {
         "email": "asdasdasd@asd.com",
         "password": "$2y$12$4gcxG5xn34JS2cBBVftSveoENFtFdXG0\/HPz0WYXYsl.pO1g0SG.G"
+    },
+    "maestra@gmail.com": {
+        "email": "maestra@gmail.com",
+        "password": "$2y$12$nrQMYmQOoU\/JdSfot2pVd.lpHzxwTCcFb2YK3yZ\/tfunvV7xx8POW"
     }
 }
